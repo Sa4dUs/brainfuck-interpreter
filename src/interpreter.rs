@@ -1,9 +1,10 @@
-use std::{collections::HashMap, io::Read};
+use std::io::Read;
+use rustc_hash::FxHashMap;
 
 const MEM_SIZE: usize = 1024;
 
 pub struct VirtualMachine {
-    cache: HashMap<usize, usize>,
+    cache: FxHashMap<usize, usize>,
     mem: [u8; MEM_SIZE],
 }
 
@@ -35,7 +36,7 @@ impl Interpreter for VirtualMachine {
     fn new() -> Self {
         VirtualMachine {
             mem: [0; MEM_SIZE],
-            cache: HashMap::new(),
+            cache: FxHashMap::default(),
         }
     }
 
