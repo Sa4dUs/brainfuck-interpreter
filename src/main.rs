@@ -1,4 +1,4 @@
-use std::{fs, process::exit, time::Instant};
+use std::{fs::File, io::Read, process::exit, time::Instant};
 
 use clap::Parser;
 use rustfuck::interpreter::*;
@@ -17,18 +17,27 @@ fn main() {
         exit(1)
     }
 
-    let content = match fs::read_to_string(path) {
-        Ok(content) => content,
+    let mut file = match File::open(&path) {
+        Ok(file) => file,
         Err(_) => {
-            eprintln!("Error: cannot read file");
+            eprintln!("Error: cannot open file");
             exit(1);
         }
     };
+    
+    let mut buffer = Vec::new();
+    match file.read_to_end(&mut buffer) {
+        Ok(_) => (),
+        Err(_) => {
+            eprintln!("Error: cannot read target file");
+            exit(1);
+        }
+    }
 
     let mut interpreter = VirtualMachine::new();
 
     let start = Instant::now();
-    interpreter.exec(content.clone().into());
+    interpreter.exec(buffer);
     let duration = start.elapsed();
 
     println!("\n=== Code Execution Succesful {:?} ===", duration);
