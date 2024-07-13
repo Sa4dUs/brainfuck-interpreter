@@ -6,5 +6,6 @@ edition = "2021"
 [dependencies]
 clap = { version = "4.5.9", features = ["derive"] }
 rustc-hash = "2.0.0"
-clippy = "0.0.302"
 
+[dev-dependencies]
+clippy = "0.0.302"
