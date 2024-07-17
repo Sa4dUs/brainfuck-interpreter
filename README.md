@@ -31,7 +31,7 @@ Brainfuck uses a very small set of commands, each represented by a single charac
 
 Clone the repository:
 ```bash
-git clone https://github.com/your_username/rustfuck.git
+git clone https://github.com/sa4dus/rustfuck.git
 cd rustfuck
 ```
 ## Usage
